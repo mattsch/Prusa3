@@ -54,7 +54,7 @@ default_mounting_holes=mounting_holes_symmetrical;
 
 //translate([70,0,0])  i3_fanmount();
 wade(hotend_mount=default_extruder_mount,	mounting_holes=default_mounting_holes);
-translate([-35,10,0]) bearing_washer();
+translate([-40,10,0]) bearing_washer();
 translate([-20,10,15.25]) rotate([0,-90,0]) wadeidler(); 
 
 
