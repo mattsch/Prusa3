@@ -4,4 +4,3 @@ box_frame/output/*.stl
 box_frame/output/extras/*.stl
 single_plate/output/*.stl
 tags
-configuration.scad
