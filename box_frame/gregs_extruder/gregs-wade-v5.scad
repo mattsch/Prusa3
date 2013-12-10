@@ -15,7 +15,7 @@
 // Recessed M3 nut traps were added for JHead (wildseyed) mount on the X-carriage side of the body.
 // Radius of the nut trap built into the idler hinge was increased by .5mm because mine are always too small.
 // Added a OSH logo tucked into the space under the motor mount.
-// The thickness of the bearing washer was changed from 1mm to 3 times the layer_thickness.
+// The thickness of the bearing washer was changed from 1mm to 3 times the layer_height.
 // Added a fan holder
 // radius of recessed carriage mounting holes was increased by .1mm
 // The idler was mirrored, so that the screw head sticks out on the side away from the carriage (interference)
@@ -170,7 +170,7 @@ hole_for_608=23; // mrice
 
 block_top_right=[wade_block_width,wade_block_height];
 
-layer_thickness=0.35;
+//layer_height=0.35; // get this from configuration.scad
 filament_diameter=3;
 filament_feed_hole_d=(filament_diameter*1.1)/cos(180/8);
 hobbing_depth=2;
@@ -220,7 +220,7 @@ module bearing_washer()
 {
 	difference()
 	{
-		cylinder(r=hole_for_608/2-0.05,h=3*layer_thickness);
+		cylinder(r=hole_for_608/2-0.05,h=3*layer_height);
 		translate([0,0,-1])
 		cylinder(r=8,h=3); 
 	}
@@ -290,7 +290,7 @@ module wade(
 			cube([base_length,base_thickness,wade_block_depth+base_extra_depth]);
 			//Base aligement helper
 			//translate([-base_leadout,-base_thickness/2,wade_block_depth+base_extra_depth])
-			//cube([base_length,1,layer_thickness]);
+			//cube([base_length,1,layer_height]);
 			
 
 			motor_mount ();
@@ -350,13 +350,13 @@ echo("bhmh", mounting_holes)
 	//carriage mountig holes
 	translate([-48.5+64+4,1,3]) {
 		translate([-25,0,0]) { //-46
-			translate([0,0,layer_thickness+24]) 
+			translate([0,0,layer_height+24]) 
 			  cylinder(r=m3_diameter/2, h=wade_block_depth+0.2+base_extra_depth, center=true,$fn=20);
 			cylinder(r=m3_nut_diameter/2+0.5, h=20, center=true,$fn=20);
 		}
 		
 		translate([5,0,0]) { //-22
-			translate([0,0,layer_thickness+24]) 
+			translate([0,0,layer_height+24]) 
 			  cylinder(r=m3_diameter/2, h=wade_block_depth+0.2+base_extra_depth, center=true,$fn=20);
 			cylinder(r=m3_nut_diameter/2+0.5, h=20, center=true,$fn=20);
 		}
@@ -397,11 +397,11 @@ echo("bhmh", mounting_holes)
 			translate([-13,0,9.5])
 			b608(h=wade_block_depth);
 		
-			translate([0,0,8+layer_thickness])
-			cylinder(r=m8_clearance_hole/2,h=wade_block_depth-(8+layer_thickness)+2);	
+			translate([0,0,8+layer_height])
+			cylinder(r=m8_clearance_hole/2,h=wade_block_depth-(8+layer_height)+2);	
 
 			translate([0,0,20-2])
-			cylinder(r=16/2,h=wade_block_depth-(8+layer_thickness)+2);	
+			cylinder(r=16/2,h=wade_block_depth-(8+layer_height)+2);	
 
 			// Filament feed.
 			translate([-filament_feed_hole_offset,0,wade_block_depth/2])
@@ -498,7 +498,7 @@ module motor_mount_holes()
 	slot_right=2;
 
 	{
-		translate([0,0,screw_head_recess_depth+layer_thickness])
+		translate([0,0,screw_head_recess_depth+layer_height])
 		for (hole=[0:3])
 		translate([motor_hole(hole)[0],motor_hole(hole)[1],0])
 		rotate([0,0,25])
@@ -985,8 +985,8 @@ module fulcrum_support() {
 				translate([-(idler_hinge_r+3),-idler_hinge_r-2,-wade_block_depth/2])
 				difference()
 				{
-				cube([idler_hinge_r+3,	idler_hinge_r*2+4,	wade_block_depth/2-	idler_short_side/2+idler_hinge_width+0.25+layer_thickness]);
-				translate([idler_hinge_r+2,(idler_hinge_r*2+4)/2,layer_thickness*3])
+				cube([idler_hinge_r+3,	idler_hinge_r*2+4,	wade_block_depth/2-	idler_short_side/2+idler_hinge_width+0.25+layer_height]);
+				translate([idler_hinge_r+2,(idler_hinge_r*2+4)/2,layer_height*3])
 				cylinder(r=idler_hinge_r+1,h=10,$fn=50);
 				}
 				
@@ -994,13 +994,13 @@ module fulcrum_support() {
 					-idler_short_side/2+idler_hinge_width+0.25])
 				cube([idler_hinge_r+3+15,
 					idler_hinge_r*2+4,
-					layer_thickness]);
+					layer_height]);
 
 				rotate(-15) translate([-(idler_hinge_r+3),-idler_hinge_r-2,
 					-wade_block_depth/2])
 				cube([idler_hinge_r+3+15,
 					idler_hinge_r*2+4,
-					layer_thickness]);
+					layer_height]);
 
            }
 }
@@ -1015,13 +1015,13 @@ rotate(-15)
 					-idler_short_side/2+idler_hinge_width+0.25])
 				cube([idler_hinge_r+3+15,
 					idler_hinge_r*2+4,
-					layer_thickness]);
+					layer_height]);
 
 				translate([-(idler_hinge_r+3),-idler_hinge_r-2,
 					-wade_block_depth/2])
 				cube([idler_hinge_r+3+15,
 					idler_hinge_r*2+4,
-					layer_thickness]);
+					layer_height]);
 
 				translate([-(idler_hinge_r+3),-idler_hinge_r-2,-wade_block_depth/2]) cylinder(r=.5,h=8);
 				translate([-(idler_hinge_r+3),-idler_hinge_r-2+3,-wade_block_depth/2]) cylinder(r=.5,h=8);
